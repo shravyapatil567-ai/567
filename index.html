@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Generative Beat Machine</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎵 Generative Beat Machine</h1>
+
+    <div class="subtitle">
+        Explore how different rules create different genres
+    </div>
+
+    <!-- GENRE -->
+    <div class="section">
+
+        <h2>Choose a Genre</h2>
+
+        <div class="genres">
+
+            <button class="genre active" data-genre="rock">
+                Rock
+            </button>
+
+            <button class="genre" data-genre="disco">
+                Disco
+            </button>
+
+            <button class="genre" data-genre="hiphop">
+                Hip-Hop
+            </button>
+
+            <button class="genre" data-genre="reggae">
+                Reggae
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+    <div class="section">
+
+        <h2>Controls</h2>
+
+        <div class="controls">
+
+            <div class="control">
+
+                <label>
+                    <span>BPM</span>
+                    <span id="bpmValue">120</span>
+                </label>
+
+                <input
+                    type="range"
+                    id="bpm"
+                    min="60"
+                    max="180"
+                    value="120"
+                >
+
+            </div>
+
+
+            <div class="control">
+
+                <label>
+                    <span>Variation</span>
+                    <span id="variationValue">0%</span>
+                </label>
+
+                <input
+                    type="range"
+                    id="variation"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="control">
+
+                <label>
+                    <span>Syncopation</span>
+                    <span id="syncValue">0%</span>
+                </label>
+
+                <input
+                    type="range"
+                    id="syncopation"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PLAY -->
+    <div class="play-controls">
+
+        <button class="play" id="playButton">
+            ▶ Play
+        </button>
+
+        <button class="stop" id="stopButton">
+            ■ Stop
+        </button>
+
+    </div>
+
+
+    <div class="status" id="status">
+        Ready to play
+    </div>
+
+
+    <!-- BEAT GRID -->
+    <div class="section">
+
+        <h2>16-Step Beat Pattern</h2>
+
+        <div class="grid">
+
+            <div class="row" id="kickRow">
+                <div class="instrument">🥁 Kick</div>
+            </div>
+
+            <div class="row" id="snareRow">
+                <div class="instrument">👏 Snare</div>
+            </div>
+
+            <div class="row" id="hatRow">
+                <div class="instrument">✨ Hi-Hat</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFO -->
+    <div class="info">
+
+        <strong>How it works:</strong>
+
+        <br><br>
+
+        Each row represents a different drum sound.
+
+        <br><br>
+
+        <b>Kick</b> = low "BOOM"
+
+        <br>
+
+        <b>Snare</b> = sharp "CHAK"
+
+        <br>
+
+        <b>Hi-Hat</b> = high "TSS"
+
+        <br><br>
+
+        The 16 boxes represent 16 positions in one musical cycle.
+
+        <br><br>
+
+        <b>Variation</b> changes some hits.
+
+        <br>
+
+        <b>Syncopation</b> adds unexpected rhythmic positions.
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
