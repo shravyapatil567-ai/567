@@ -218,6 +218,16 @@ input[type="range"] {
 }
 
 
+.tabla-row .step.on {
+    background: #d97706;
+}
+
+
+.tabla-row .instrument {
+    color: #fbbf24;
+}
+
+
 .step.current {
     outline: 3px solid white;
 
@@ -240,6 +250,124 @@ input[type="range"] {
 }
 
 
+.sound-lab {
+    margin-top: 25px;
+    padding: 22px;
+    border: 1px solid #4c3f78;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #211d3c, #171d31);
+}
+
+
+.sound-lab-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+
+.sound-lab h2 {
+    margin: 4px 0 0;
+}
+
+
+.eyebrow {
+    color: #c4b5fd;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+
+.sound-lab-note {
+    color: #a5b4fc;
+    font-size: 13px;
+    text-align: right;
+}
+
+
+.sound-lab-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1.35fr;
+    gap: 14px;
+}
+
+
+.lab-control {
+    min-width: 0;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(17, 24, 39, 0.8);
+}
+
+
+.lab-control > label {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+
+.mix-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-bottom: 14px;
+}
+
+
+.mix-options label {
+    color: #d1d5db;
+    font-size: 13px;
+}
+
+
+.mix-options input {
+    accent-color: #8b5cf6;
+}
+
+
+.mix-button {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 13px;
+    background: #6d4bd1;
+}
+
+
+.upload-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.upload-row input[type="file"] {
+    min-width: 0;
+    width: 100%;
+    color: #d1d5db;
+    font-size: 12px;
+}
+
+
+.upload-row button {
+    padding: 8px 10px;
+    font-size: 12px;
+}
+
+
+.insert-control small {
+    display: block;
+    margin-top: 10px;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+
 @media (max-width: 700px) {
 
     .controls {
@@ -251,4 +379,88 @@ input[type="range"] {
         padding: 20px;
     }
 
+    .sound-lab-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sound-lab-heading {
+        flex-direction: column;
+    }
+
+    .sound-lab-note {
+        text-align: left;
+    }
+
+}
+
+
+.sound-lab-copy {
+    margin: 0 0 12px;
+    color: #f3f4f6;
+    line-height: 1.7;
+}
+
+
+.ideas-box {
+    margin-top: 25px;
+    padding: 18px;
+    border: 1px solid #4c3f78;
+    border-radius: 14px;
+    background: #211d3c;
+}
+
+
+.ideas-box h2 {
+    margin-top: 0;
+}
+
+
+.ideas-box p {
+    margin-bottom: 0;
+}
+
+
+.learnings-box {
+    margin-top: 25px;
+    padding: 18px;
+    border: 1px solid #4c3f78;
+    border-radius: 14px;
+    background: #211d3c;
+    line-height: 1.7;
+}
+
+
+.learnings-box h2 {
+    margin-top: 0;
+}
+
+
+.learning-grid {
+    margin: 12px 0;
+    padding: 12px;
+    border-radius: 8px;
+    background: #111827;
+    color: #d1d5db;
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+
+.tabla-control {
+    grid-column: 1 / -1;
+}
+
+
+.toggle-label {
+    align-items: center;
+    justify-content: flex-start !important;
+    gap: 10px;
+    color: #d1d5db;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+
+.toggle-label input {
+    accent-color: #8b5cf6;
 }

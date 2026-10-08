@@ -12,6 +12,29 @@ let timer = null;
 
 let currentGenre = "rock";
 
+const tablaSampleNames = [
+    "dha", "dhe", "dhec", "dhen", "dhin", "dhun", "ga", "kat",
+    "na", "ne", "re", "tak", "tin", "tit", "tun"
+];
+
+const tablaSamples = {};
+
+const tablaPatterns = {
+    rock: [1,0,1,0, 1,0,0,1, 1,0,1,0, 1,0,0,1],
+    disco: [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,0],
+    hiphop: [1,0,0,1, 0,1,0,0, 1,0,0,1, 0,0,1,0],
+    reggae: [0,1,0,1, 0,1,0,1, 0,1,0,1, 0,1,0,1]
+};
+
+const tablaBolPatterns = {
+    rock: ["dha", null, "na", "tak", "dhin", null, "kat", "na", "dha", null, "tin", "tak", "dhin", null, "ga", "na"],
+    disco: ["dha", null, "tin", null, "na", null, "tak", null, "dha", null, "tin", null, "na", null, "tak", null],
+    hiphop: ["dha", null, null, "kat", null, "na", "dhin", null, "dha", null, "ga", "na", null, "tak", "tin", null],
+    reggae: [null, "na", null, "tak", null, "dhin", null, "na", null, "kat", null, "tak", null, "dhin", null, "na"]
+};
+
+let tablaReady = false;
+
 
 // ========================================
 // GENRE PATTERNS
@@ -150,6 +173,8 @@ function copyPattern(pattern) {
 
         hat: [...pattern.hat]
 
+        ,tabla: [...tablaPatterns[currentGenre]]
+
     };
 
 }
@@ -185,7 +210,7 @@ function generatePattern() {
 
     if (variation > 0) {
 
-        ["kick", "snare", "hat"].forEach(
+        ["kick", "snare", "hat", "tabla"].forEach(
             instrument => {
 
                 for (let i = 0; i < 16; i++) {
@@ -435,6 +460,51 @@ function playHat() {
 }
 
 
+function playTabla(step) {
+
+    if (!tablaReady || !document.getElementById("tablaLayer").checked) return;
+
+    const baseHit = currentPattern.tabla[step];
+    const improvisation = Number(document.getElementById("variation").value) / 100;
+
+    if (!baseHit && Math.random() > improvisation * 0.35) return;
+
+    const phraseSample = tablaBolPatterns[currentGenre][step];
+    const sampleName = phraseSample || tablaSampleNames[
+        Math.floor(Math.random() * tablaSampleNames.length)
+    ];
+    const source = audioContext.createBufferSource();
+    const gain = audioContext.createGain();
+
+    source.buffer = tablaSamples[sampleName];
+    gain.gain.value = baseHit ? 0.32 : 0.18;
+    source.connect(gain);
+    gain.connect(audioContext.destination);
+    source.start();
+
+}
+
+
+async function loadTablaSamples() {
+
+    const loads = tablaSampleNames.map(async sampleName => {
+        const response = await fetch("Tabla_Samples/" + sampleName + ".mp3");
+        const data = await response.arrayBuffer();
+        tablaSamples[sampleName] = await audioContext.decodeAudioData(data);
+    });
+
+    try {
+        await Promise.all(loads);
+        tablaReady = true;
+        document.getElementById("tablaStatus").textContent = "Ready";
+    } catch (error) {
+        document.getElementById("tablaStatus").textContent = "Unavailable";
+        throw error;
+    }
+
+}
+
+
 // ========================================
 // PLAY ONE STEP
 // ========================================
@@ -463,6 +533,8 @@ function playStep() {
         playHat();
 
     }
+
+    playTabla(step);
 
 
     highlightStep(step);
@@ -497,6 +569,11 @@ async function start() {
                 window.webkitAudioContext
             )();
 
+    }
+
+    if (!tablaReady) {
+        document.getElementById("status").textContent = "Loading tabla samples...";
+        await loadTablaSamples();
     }
 
 
@@ -650,6 +727,11 @@ function updateGrid() {
     createRow(
         "hatRow",
         currentPattern.hat
+    );
+
+    createRow(
+        "tablaRow",
+        currentPattern.tabla
     );
 
 }
